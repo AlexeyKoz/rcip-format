@@ -216,9 +216,8 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for deta
 ## Support
 
 For questions and support:
-- GitHub Issues: https://github.com/alexey-kozlov/rcip-format/issues
-- Email: rcip-format@example.com
-- Discord: [Join our community](https://discord.gg/rcip-format)
+- GitHub Issues: https://github.com/AlexeyKoz/rcip-format/issues
+- Email: rcip-format@gmail.com
 
 ## License
 
