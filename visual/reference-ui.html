@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCIP Recipe Viewer - Reference UI</title>
+    <title>RCIP Recipe Viewer - Ukrainian Borscht</title>
     <style>
         * {
             margin: 0;
@@ -214,6 +214,34 @@
             color: var(--dark-text);
         }
 
+        /* Allergen Warning */
+        .allergen-warning {
+            background: linear-gradient(135deg, #fed7aa, #fbbf24);
+            border: 2px solid #f59e0b;
+            padding: 12px 30px;
+            margin: 20px auto;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 600;
+            color: #92400e;
+            border-radius: 8px;
+        }
+
+        .warning-icon {
+            background: #f59e0b;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+        }
+
         /* Ingredients List */
         .ingredient-item {
             display: flex;
@@ -327,6 +355,29 @@
             width: 16px;
             height: 16px;
             fill: var(--primary-color);
+        }
+
+        /* Sub-steps */
+        .sub-steps {
+            margin-left: 60px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        .sub-step {
+            padding: 8px 12px;
+            background: #f8f9ff;
+            border-left: 2px solid #a0aec0;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--dark-text);
+        }
+
+        .sub-step-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-right: 6px;
         }
 
         /* Device Profiles */
@@ -463,6 +514,19 @@
             color: #E74C3C;
         }
 
+        /* Rating */
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            margin: 10px 0;
+        }
+
+        .star {
+            color: #fdcb6e;
+            font-size: 20px;
+        }
+
         /* Loading State */
         .loading {
             text-align: center;
@@ -534,6 +598,16 @@
         </div>
     </header>
 
+    <!-- Allergen Warning -->
+    <div class="allergen-warning">
+        <span class="warning-icon">!</span>
+        <div>
+            <strong>ALLERGEN WARNING:</strong> Contains
+            <span style="margin: 0 10px;">🥛 Dairy Products (Sour Cream)</span>
+        </div>
+        <span class="warning-icon">!</span>
+    </div>
+
     <!-- Navigation Tabs -->
     <nav class="tabs">
         <div class="container">
@@ -556,17 +630,17 @@
             <div class="tab-panel active" id="overview">
                 <div class="recipe-info">
                     <div class="recipe-header">
-                        <h2 class="recipe-title">Classic Margherita Pizza</h2>
-                        <p class="text-muted">Traditional Neapolitan pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil</p>
+                        <h2 class="recipe-title">Ukrainian Borscht</h2>
+                        <p class="text-muted">Traditional Ukrainian red beet soup with beef, vegetables, and sour cream. A hearty, nutritious meal perfect for cold days!</p>
                     </div>
                     <div class="recipe-meta">
                         <div class="meta-item">
                             <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                            <span><strong>25 min</strong> active</span>
+                            <span><strong>30 min</strong> preparation</span>
                         </div>
                         <div class="meta-item">
                             <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                            <span><strong>25 hours</strong> total</span>
+                            <span><strong>3 hours</strong> total</span>
                         </div>
                         <div class="meta-item">
                             <svg class="meta-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
@@ -574,39 +648,47 @@
                         </div>
                         <div class="meta-item">
                             <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-                            <span><strong>2 pizzas</strong> servings</span>
+                            <span><strong>8 portions</strong> servings</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="grid grid-2">
                     <div class="card">
-                        <h3 class="card-title">🏷️ Diet Labels</h3>
+                        <h3 class="card-title">🏷️ Tags & Labels</h3>
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            <span class="param-badge" style="background: var(--success-color);">✓ Vegetarian</span>
-                            <span class="param-badge" style="background: var(--success-color);">✓ Nut-Free</span>
+                            <span class="param-badge" style="background: var(--success-color);">🲠Soup</span>
+                            <span class="param-badge" style="background: var(--success-color);">🇺🇦 Ukrainian Cuisine</span>
+                            <span class="param-badge" style="background: var(--success-color);">🥩 With Meat</span>
+                            <span class="param-badge" style="background: var(--success-color);">❄️ Winter</span>
+                            <span class="param-badge" style="background: var(--success-color);">🌿 Traditional</span>
+                            <span class="param-badge" style="background: #fab1a0;">💪 Rich in Protein (25g)</span>
+                            <span class="param-badge" style="background: #ff7675; color: white;">🔥 320 kcal per serving</span>
+                            <span class="param-badge" style="background: #6c5ce7; color: white;">✡️ Not Kosher</span>
                         </div>
                     </div>
 
                     <div class="card">
                         <h3 class="card-title">⚠️ Allergen Information</h3>
                         <div>
-                            <span class="allergen-badge">Gluten</span>
-                            <span class="allergen-badge">Wheat</span>
-                            <span class="allergen-badge">Milk</span>
+                            <span class="allergen-badge">Dairy</span>
                             <span class="allergen-badge">Lactose</span>
                         </div>
+                        <p class="text-muted mt-1">Contains sour cream (dairy product)</p>
                     </div>
                 </div>
 
                 <div class="card mt-2">
-                    <h3 class="card-title">📍 Origin</h3>
+                    <h3 class="card-title">📍 Origin & Author</h3>
                     <div class="recipe-meta">
                         <div class="meta-item">
-                            <span>🇮🇹 <strong>Italy</strong> • Campania • Naples</span>
+                            <span>👨‍🍳 <strong>Maria Petrenko</strong> • Ukrainian Culinary Heritage Foundation</span>
                         </div>
                         <div class="meta-item">
-                            <span>🍕 <strong>Italian Cuisine</strong> • Traditional</span>
+                            <span>📅 Created: 2025-01-15 • Version 2.1.0</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⭐ <strong>4.9 / 5.0</strong> (156 reviews)</span>
                         </div>
                     </div>
                 </div>
@@ -615,19 +697,17 @@
             <!-- Ingredients Tab -->
             <div class="tab-panel" id="ingredients">
                 <div class="card">
-                    <h3 class="card-title">Ingredients List</h3>
+                    <h3 class="card-title">🥬 Ingredients List</h3>
                     <div id="ingredients-list">
                         <div class="ingredient-item">
                             <input type="checkbox" class="ingredient-checkbox">
                             <div class="ingredient-details">
                                 <div>
                                     <span class="ingredient-amount">500g</span>
-                                    <span class="ingredient-name">00 flour</span>
+                                    <span class="ingredient-name">Beef with bone</span>
                                 </div>
                                 <div class="ingredient-meta">
-                                    Caputo or similar Italian 00 flour recommended
-                                    <span class="allergen-badge">gluten</span>
-                                    <span class="allergen-badge">wheat</span>
+                                    For rich broth, use beef shank or short ribs
                                 </div>
                             </div>
                         </div>
@@ -635,11 +715,11 @@
                             <input type="checkbox" class="ingredient-checkbox">
                             <div class="ingredient-details">
                                 <div>
-                                    <span class="ingredient-amount">325ml</span>
-                                    <span class="ingredient-name">water</span>
+                                    <span class="ingredient-amount">2 medium</span>
+                                    <span class="ingredient-name">Beets</span>
                                 </div>
                                 <div class="ingredient-meta">
-                                    Room temperature (20-22°C), filtered preferred
+                                    Fresh, firm beets for best color
                                 </div>
                             </div>
                         </div>
@@ -647,28 +727,100 @@
                             <input type="checkbox" class="ingredient-checkbox">
                             <div class="ingredient-details">
                                 <div>
-                                    <span class="ingredient-amount">250g</span>
-                                    <span class="ingredient-name">fresh mozzarella</span>
+                                    <span class="ingredient-amount">300g</span>
+                                    <span class="ingredient-name">White cabbage</span>
                                 </div>
                                 <div class="ingredient-meta">
-                                    Buffalo mozzarella for authentic taste
-                                    <span class="allergen-badge">milk</span>
+                                    Shredded into thin strips
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">1 large</span>
+                                    <span class="ingredient-name">Carrots</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Grated or julienned
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">1 medium</span>
+                                    <span class="ingredient-name">Onion</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Yellow or white onion, diced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">2 medium</span>
+                                    <span class="ingredient-name">Potatoes</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Waxy variety preferred
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">2 tbsp</span>
+                                    <span class="ingredient-name">Tomato paste</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Adds depth and acidity
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">3 cloves</span>
+                                    <span class="ingredient-name">Garlic</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Fresh, minced
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">For serving</span>
+                                    <span class="ingredient-name">Sour cream</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Traditional garnish
+                                    <span class="allergen-badge">dairy</span>
                                     <span class="allergen-badge">lactose</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="ingredient-item">
-                            <input type="checkbox" class="ingredient-checkbox">
-                            <div class="ingredient-details">
-                                <div>
-                                    <span class="ingredient-amount">400g</span>
-                                    <span class="ingredient-name">San Marzano tomatoes</span>
-                                </div>
-                                <div class="ingredient-meta">
-                                    Canned whole, Cento brand
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <h3 class="card-title">🔧 Tools & Equipment</h3>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <div class="param-badge">🍲 Large pot (5L)</div>
+                        <div class="param-badge">🔪 Chef's knife</div>
+                        <div class="param-badge">🥄 Wooden spoon</div>
+                        <div class="param-badge">🧅 Grater</div>
+                        <div class="param-badge">🍳 Frying pan</div>
+                        <div class="param-badge">🔥 Stovetop</div>
                     </div>
                 </div>
             </div>
@@ -676,43 +828,145 @@
             <!-- Steps Tab -->
             <div class="tab-panel" id="steps">
                 <div class="card">
-                    <h3 class="card-title">Cooking Instructions</h3>
+                    <h3 class="card-title">👨‍🍳 Cooking Instructions</h3>
                     <div id="steps-list">
+                        <!-- Step 1 -->
                         <div class="step-item active">
                             <div class="step-number">1</div>
                             <div class="step-content">
-                                <div class="step-text">Dissolve yeast in warm water and let it activate for 5 minutes</div>
+                                <div class="step-text">Place beef in cold water, bring to boil and cook to make broth</div>
                                 <div class="step-params">
                                     <span class="param-badge">
                                         <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
-                                        5 minutes
+                                        1.5 hours
                                     </span>
-                                    <span class="param-badge">
-                                        🌡️ 38°C
-                                    </span>
+                                    <span class="param-badge">🌡️ 100°C</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="sub-steps">
+                            <div class="sub-step">
+                                <span class="sub-step-number">1.1</span>
+                                Cut meat into 2-3 cm cubes
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">1.2</span>
+                                Bring water to boil, add salt
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">1.3</span>
+                                Remove foam from surface periodically
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
                         <div class="step-item">
                             <div class="step-number">2</div>
                             <div class="step-content">
-                                <div class="step-text">Combine flour and salt in a large mixing bowl</div>
+                                <div class="step-text">Peel and grate beets, sauté with vinegar to preserve color</div>
                                 <div class="step-params">
-                                    <span class="param-badge">🥣 Large bowl</span>
+                                    <span class="param-badge">
+                                        <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        15 minutes
+                                    </span>
+                                    <span class="param-badge">🌡️ Medium heat</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="sub-steps">
+                            <div class="sub-step">
+                                <span class="sub-step-number">2.1</span>
+                                Peel and grate beets on coarse grater
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">2.2</span>
+                                Sauté with 1 tbsp vinegar until softened
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
                         <div class="step-item">
                             <div class="step-number">3</div>
                             <div class="step-content">
-                                <div class="step-text">Knead dough for 10 minutes until smooth and elastic</div>
+                                <div class="step-text">Dice onion and grate carrot, sauté until golden</div>
                                 <div class="step-params">
                                     <span class="param-badge">
                                         <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
                                         10 minutes
                                     </span>
-                                    <span class="param-badge">✋ Hand kneading</span>
+                                    <span class="param-badge">🌡️ Medium heat</span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="sub-steps">
+                            <div class="sub-step">
+                                <span class="sub-step-number">3.1</span>
+                                Dice onion into 5mm pieces
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">3.2</span>
+                                Add tomato paste and cook for 3 more minutes
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="step-item">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-text">Add vegetables to broth in sequence: potatoes, cabbage, then sautéed vegetables</div>
+                                <div class="step-params">
+                                    <span class="param-badge">
+                                        <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        20 minutes
+                                    </span>
+                                    <span class="param-badge">🌡️ Simmer (90°C)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-steps">
+                            <div class="sub-step">
+                                <span class="sub-step-number">4.1</span>
+                                Add diced potatoes, cook 10 minutes
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">4.2</span>
+                                Add shredded cabbage, cook 5 minutes
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">4.3</span>
+                                Add sautéed beets and onion-carrot mix
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="step-item">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="step-text">Season with salt, pepper, add garlic and herbs. Let rest before serving</div>
+                                <div class="step-params">
+                                    <span class="param-badge">
+                                        <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        15 minutes rest
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-steps">
+                            <div class="sub-step">
+                                <span class="sub-step-number">5.1</span>
+                                Add minced garlic in last 2 minutes of cooking
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">5.2</span>
+                                Turn off heat, add fresh dill and parsley
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">5.3</span>
+                                Let rest covered for 15 minutes
+                            </div>
+                            <div class="sub-step">
+                                <span class="sub-step-number">5.4</span>
+                                Serve hot with sour cream
                             </div>
                         </div>
                     </div>
@@ -722,62 +976,95 @@
             <!-- Devices Tab -->
             <div class="tab-panel" id="devices">
                 <div class="card">
-                    <h3 class="card-title">Device Profiles</h3>
+                    <h3 class="card-title">🤖 Smart Kitchen Integration</h3>
                     <div class="device-card">
                         <div class="device-header">
-                            <div class="device-icon">🔥</div>
+                            <div class="device-icon">🍲</div>
                             <div>
-                                <div class="device-name">Traditional Wood-Fired Pizza Oven</div>
-                                <div class="device-type">Forno Bravo Casa2G110</div>
+                                <div class="device-name">Stovetop Profile</div>
+                                <div class="device-type">Gas/Electric Compatible</div>
                             </div>
                         </div>
                         <div class="device-params">
                             <div class="device-param">
-                                <span class="param-label">Temperature:</span>
-                                <span class="param-value">450°C</span>
+                                <span class="param-label">Type:</span>
+                                <span class="param-value">Gas or Electric</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Heating:</span>
-                                <span class="param-value">Wood-fire</span>
+                                <span class="param-label">Heat Levels:</span>
+                                <span class="param-value">Medium/High</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Preheat:</span>
-                                <span class="param-value">45 min</span>
+                                <span class="param-label">Pot Size:</span>
+                                <span class="param-value">5L minimum</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Capacity:</span>
-                                <span class="param-value">4 pizzas</span>
+                                <span class="param-label">Status:</span>
+                                <span class="param-value">Available ✓</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="device-card">
                         <div class="device-header">
-                            <div class="device-icon">🏠</div>
+                            <div class="device-icon">🔥</div>
                             <div>
-                                <div class="device-name">Home Oven Alternative</div>
-                                <div class="device-type">Standard home oven with pizza stone</div>
+                                <div class="device-name">Temperature Control</div>
+                                <div class="device-type">Automated monitoring system</div>
                             </div>
                         </div>
                         <div class="device-params">
                             <div class="device-param">
-                                <span class="param-label">Temperature:</span>
-                                <span class="param-value">250°C</span>
+                                <span class="param-label">Broth Temp:</span>
+                                <span class="param-value">90-100°C</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Mode:</span>
-                                <span class="param-value">Bottom heat + broiler</span>
+                                <span class="param-label">Sauté Temp:</span>
+                                <span class="param-value">Medium heat</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Pizza Stone:</span>
-                                <span class="param-value">Required</span>
+                                <span class="param-label">Simmer:</span>
+                                <span class="param-value">90°C</span>
                             </div>
                             <div class="device-param">
-                                <span class="param-label">Bake Time:</span>
-                                <span class="param-value">8 minutes</span>
+                                <span class="param-label">Sensors:</span>
+                                <span class="param-value">Active</span>
                             </div>
                         </div>
                     </div>
+
+                    <div class="device-card">
+                        <div class="device-header">
+                            <div class="device-icon">🔪</div>
+                            <div>
+                                <div class="device-name">Cutting Profile</div>
+                                <div class="device-type">Automated prep station</div>
+                            </div>
+                        </div>
+                        <div class="device-params">
+                            <div class="device-param">
+                                <span class="param-label">Meat:</span>
+                                <span class="param-value">2-3cm cubes</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Onion:</span>
+                                <span class="param-value">5mm dice</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Beets:</span>
+                                <span class="param-value">Coarse grate</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Status:</span>
+                                <span class="param-value">Configured</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <h3 class="card-title">Note</h3>
+                    <p class="text-muted">Oven not required for this recipe. All cooking is done on stovetop.</p>
                 </div>
             </div>
 
@@ -787,28 +1074,40 @@
                     <h3 class="card-title">Quality Control Sensors</h3>
                     <div class="sensor-grid">
                         <div class="sensor-card active">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4z"/></svg>
+                            <div class="sensor-type">Temperature</div>
+                            <div class="sensor-value">90-100</div>
+                            <div class="sensor-unit">°C (Broth)</div>
+                        </div>
+                        <div class="sensor-card">
                             <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2l.5.5L6 15.5 4.5 17H12v5l-.5.5L18 9.5 19.5 8H12V2z"/></svg>
                             <div class="sensor-type">Color</div>
                             <div class="sensor-value">RGB</div>
-                            <div class="sensor-unit">Crust browning</div>
-                        </div>
-                        <div class="sensor-card">
-                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4z"/></svg>
-                            <div class="sensor-type">Temperature</div>
-                            <div class="sensor-value">450</div>
-                            <div class="sensor-unit">°C</div>
+                            <div class="sensor-unit">150,30,40 (Deep Red)</div>
                         </div>
                         <div class="sensor-card">
                             <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                            <div class="sensor-type">Moisture</div>
-                            <div class="sensor-value">58</div>
-                            <div class="sensor-unit">% hydration</div>
+                            <div class="sensor-type">pH Level</div>
+                            <div class="sensor-value">5.0-5.5</div>
+                            <div class="sensor-unit">Target Range</div>
                         </div>
                         <div class="sensor-card">
                             <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                             <div class="sensor-type">Texture</div>
-                            <div class="sensor-value">15</div>
-                            <div class="sensor-unit">N hardness</div>
+                            <div class="sensor-value">Monitor</div>
+                            <div class="sensor-unit">Vegetable softness</div>
+                        </div>
+                        <div class="sensor-card active">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            <div class="sensor-type">Timer</div>
+                            <div class="sensor-value">Active</div>
+                            <div class="sensor-unit">Multi-stage</div>
+                        </div>
+                        <div class="sensor-card">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <div class="sensor-type">Volume</div>
+                            <div class="sensor-value">~4L</div>
+                            <div class="sensor-unit">Final yield</div>
                         </div>
                     </div>
                 </div>
@@ -819,27 +1118,27 @@
                 <div class="grid grid-2">
                     <div class="card">
                         <h3 class="card-title">Nutritional Information</h3>
-                        <p class="text-muted mb-2">Per serving (1/2 pizza)</p>
+                        <p class="text-muted mb-2">Per serving (1 portion)</p>
                         <div style="display: grid; gap: 0.5rem;">
                             <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
                                 <span>Calories</span>
-                                <strong>450</strong>
+                                <strong>320 kcal</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
                                 <span>Protein</span>
-                                <strong>18g</strong>
+                                <strong>25g</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
                                 <span>Carbohydrates</span>
-                                <strong>55g</strong>
+                                <strong>28g</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
                                 <span>Fat</span>
-                                <strong>16g</strong>
+                                <strong>12g</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
                                 <span>Fiber</span>
-                                <strong>3g</strong>
+                                <strong>5g</strong>
                             </div>
                         </div>
                     </div>
@@ -849,33 +1148,47 @@
                         <div style="display: grid; gap: 1rem;">
                             <div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                    <span>Calcium</span>
+                                    <span>Iron</span>
+                                    <span>35% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 35%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Vitamin A</span>
+                                    <span>45% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 45%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Vitamin C</span>
+                                    <span>30% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 30%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Potassium</span>
                                     <span>25% DV</span>
                                 </div>
                                 <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
                                     <div style="background: var(--primary-color); height: 100%; width: 25%;"></div>
                                 </div>
                             </div>
-                            <div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                    <span>Iron</span>
-                                    <span>15% DV</span>
-                                </div>
-                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
-                                    <div style="background: var(--primary-color); height: 100%; width: 15%;"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-                                    <span>Vitamin A</span>
-                                    <span>10% DV</span>
-                                </div>
-                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
-                                    <div style="background: var(--primary-color); height: 100%; width: 10%;"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="card mt-2">
+                    <h3 class="card-title">Dietary Notes</h3>
+                    <p class="text-muted">Rich in protein from beef, high in vitamins A and C from vegetables, good source of iron. Contains dairy (sour cream). Not suitable for vegans or those with lactose intolerance without modifications.</p>
                 </div>
             </div>
 
@@ -886,21 +1199,41 @@
                     <div class="json-viewer">
                         <pre><code>{
   <span class="json-key">"rcip_version"</span>: <span class="json-string">"0.1"</span>,
-  <span class="json-key">"id"</span>: <span class="json-string">"rcip-550e8400-e29b-41d4-a716-446655440001"</span>,
+  <span class="json-key">"id"</span>: <span class="json-string">"rcip-borscht-ukrainian-traditional-001"</span>,
   <span class="json-key">"meta"</span>: {
-    <span class="json-key">"name"</span>: <span class="json-string">"Classic Margherita Pizza"</span>,
-    <span class="json-key">"description"</span>: <span class="json-string">"Traditional Neapolitan pizza"</span>,
+    <span class="json-key">"name"</span>: <span class="json-string">"Ukrainian Borscht"</span>,
+    <span class="json-key">"description"</span>: <span class="json-string">"Traditional Ukrainian red beet soup with beef"</span>,
     <span class="json-key">"author"</span>: {
-      <span class="json-key">"name"</span>: <span class="json-string">"Chef Antonio Rossi"</span>,
-      <span class="json-key">"email"</span>: <span class="json-string">"antonio@napoliculinary.it"</span>
+      <span class="json-key">"name"</span>: <span class="json-string">"Maria Petrenko"</span>,
+      <span class="json-key">"organization"</span>: <span class="json-string">"Ukrainian Culinary Heritage Foundation"</span>
     },
+    <span class="json-key">"version"</span>: <span class="json-string">"2.1.0"</span>,
+    <span class="json-key">"created"</span>: <span class="json-string">"2025-01-15"</span>,
     <span class="json-key">"servings"</span>: {
-      <span class="json-key">"amount"</span>: <span class="json-number">2</span>,
-      <span class="json-key">"unit"</span>: <span class="json-string">"pizzas"</span>
+      <span class="json-key">"amount"</span>: <span class="json-number">8</span>,
+      <span class="json-key">"unit"</span>: <span class="json-string">"portions"</span>
     },
-    <span class="json-key">"diet_labels"</span>: [<span class="json-string">"vegetarian"</span>, <span class="json-string">"nut-free"</span>],
+    <span class="json-key">"cuisine"</span>: <span class="json-string">"Ukrainian"</span>,
+    <span class="json-key">"tags"</span>: [<span class="json-string">"soup"</span>, <span class="json-string">"traditional"</span>, <span class="json-string">"winter"</span>],
+    <span class="json-key">"diet_labels"</span>: [<span class="json-string">"contains-meat"</span>, <span class="json-string">"contains-dairy"</span>],
+    <span class="json-key">"allergens"</span>: [<span class="json-string">"dairy"</span>, <span class="json-string">"lactose"</span>],
     <span class="json-key">"difficulty"</span>: <span class="json-string">"intermediate"</span>,
-    <span class="json-key">"total_time_minutes"</span>: <span class="json-number">1500</span>
+    <span class="json-key">"prep_time_minutes"</span>: <span class="json-number">30</span>,
+    <span class="json-key">"cook_time_minutes"</span>: <span class="json-number">150</span>,
+    <span class="json-key">"total_time_minutes"</span>: <span class="json-number">180</span>,
+    <span class="json-key">"rating"</span>: {
+      <span class="json-key">"score"</span>: <span class="json-number">4.9</span>,
+      <span class="json-key">"reviews"</span>: <span class="json-number">156</span>
+    }
+  },
+  <span class="json-key">"nutrition"</span>: {
+    <span class="json-key">"per_serving"</span>: {
+      <span class="json-key">"calories"</span>: <span class="json-number">320</span>,
+      <span class="json-key">"protein_g"</span>: <span class="json-number">25</span>,
+      <span class="json-key">"carbs_g"</span>: <span class="json-number">28</span>,
+      <span class="json-key">"fat_g"</span>: <span class="json-number">12</span>,
+      <span class="json-key">"fiber_g"</span>: <span class="json-number">5</span>
+    }
   },
   <span class="json-key">"ingredients"</span>: [...],
   <span class="json-key">"steps"</span>: [...],
@@ -945,11 +1278,12 @@
 
         // Simulate sensor updates
         function updateSensors() {
-            const tempSensor = document.querySelector('.sensor-card:nth-child(2) .sensor-value');
+            const tempSensor = document.querySelector('.sensor-card:nth-child(1) .sensor-value');
             if (tempSensor) {
-                const currentTemp = parseInt(tempSensor.textContent);
-                const newTemp = currentTemp + (Math.random() > 0.5 ? 1 : -1);
-                tempSensor.textContent = Math.max(440, Math.min(460, newTemp));
+                const currentTemp = parseInt(tempSensor.textContent.split('-')[0]);
+                const variation = Math.random() > 0.5 ? 1 : -1;
+                const newTemp = Math.max(88, Math.min(102, currentTemp + variation));
+                tempSensor.textContent = `${newTemp}-${newTemp + 10}`;
             }
         }
 
