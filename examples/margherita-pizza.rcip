@@ -1,0 +1,645 @@
+{
+  "rcip_version": "0.1",
+  "id": "rcip-550e8400-e29b-41d4-a716-446655440001",
+  "meta": {
+    "name": "Classic Margherita Pizza",
+    "description": "Traditional Neapolitan pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil",
+    "author": {
+      "name": "Chef Antonio Rossi",
+      "email": "antonio@napoliculinary.it",
+      "organization": "Napoli Culinary Institute"
+    },
+    "origin": {
+      "country": "IT",
+      "region": "Campania",
+      "city": "Naples",
+      "cuisine_type": "Italian",
+      "traditional": true
+    },
+    "servings": {
+      "amount": 2,
+      "unit": "pizzas",
+      "adjustable": true
+    },
+    "diet_labels": ["vegetarian", "nut-free"],
+    "keywords": ["pizza", "italian", "neapolitan", "traditional", "wood-fired"],
+    "difficulty": "intermediate",
+    "prep_time_minutes": 30,
+    "active_time_minutes": 45,
+    "total_time_minutes": 1500,
+    "created_date": "2025-01-15T10:30:00Z",
+    "updated_date": "2025-01-15T10:30:00Z",
+    "version": "1.0.0",
+    "license": "CC-BY-SA-4.0"
+  },
+  "ingredients": [
+    {
+      "id": "ing-0001",
+      "name": "00 flour",
+      "human_amount": "500g",
+      "machine_amount": {
+        "value": 500,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "fine-milled",
+      "external_ids": {
+        "GTIN": "8001810000123",
+        "USDA": "20081",
+        "OpenFoodFacts": "3017620422003"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 361,
+          "protein": 11.0,
+          "carbs": 72.5,
+          "fat": 1.5,
+          "fiber": 2.7
+        }
+      },
+      "substitutes": [
+        {
+          "id": "sub-0001",
+          "name": "bread flour",
+          "ratio": 1.0,
+          "notes": "Higher protein content, may need adjustment"
+        }
+      ],
+      "allergens": ["gluten", "wheat"],
+      "notes": "Caputo or similar Italian 00 flour recommended",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0002",
+      "name": "water",
+      "human_amount": "325ml",
+      "machine_amount": {
+        "value": 325,
+        "unit": "ml",
+        "approximate": false
+      },
+      "state": "room-temperature",
+      "temperature_c": {
+        "min": 20,
+        "max": 22
+      },
+      "external_ids": {},
+      "allergens": [],
+      "notes": "Filtered water preferred",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0003",
+      "name": "active dry yeast",
+      "human_amount": "2g",
+      "machine_amount": {
+        "value": 2,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "dry",
+      "external_ids": {
+        "USDA": "18375"
+      },
+      "substitutes": [
+        {
+          "id": "sub-0002",
+          "name": "fresh yeast",
+          "ratio": 3.0,
+          "notes": "Use 6g fresh yeast instead"
+        }
+      ],
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0004",
+      "name": "sea salt",
+      "human_amount": "10g",
+      "machine_amount": {
+        "value": 10,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "fine",
+      "external_ids": {
+        "USDA": "02047"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0005",
+      "name": "extra virgin olive oil",
+      "human_amount": "30ml",
+      "machine_amount": {
+        "value": 30,
+        "unit": "ml",
+        "approximate": false
+      },
+      "state": "liquid",
+      "external_ids": {
+        "USDA": "04053",
+        "OpenFoodFacts": "8001620000984"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 884,
+          "fat": 100,
+          "saturated_fat": 14
+        }
+      },
+      "allergens": [],
+      "notes": "Cold-pressed Italian olive oil preferred",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0006",
+      "name": "San Marzano tomatoes",
+      "human_amount": "400g",
+      "machine_amount": {
+        "value": 400,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "canned-whole",
+      "brand": "Cento",
+      "external_ids": {
+        "GTIN": "8014808000129",
+        "USDA": "11531"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 32,
+          "carbs": 7,
+          "protein": 1.6,
+          "fiber": 2
+        }
+      },
+      "substitutes": [
+        {
+          "id": "sub-0003",
+          "name": "crushed tomatoes",
+          "ratio": 1.0,
+          "notes": "Good quality Italian tomatoes"
+        }
+      ],
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0007",
+      "name": "fresh mozzarella",
+      "human_amount": "250g",
+      "machine_amount": {
+        "value": 250,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "fresh",
+      "temperature_c": {
+        "min": 4,
+        "max": 8
+      },
+      "external_ids": {
+        "USDA": "01026"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 280,
+          "protein": 22,
+          "fat": 22,
+          "calcium": 505
+        }
+      },
+      "allergens": ["milk", "lactose"],
+      "notes": "Buffalo mozzarella (mozzarella di bufala) for authentic taste",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0008",
+      "name": "fresh basil leaves",
+      "human_amount": "15 leaves",
+      "machine_amount": {
+        "value": 15,
+        "unit": "pcs",
+        "approximate": true
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "02044"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0009",
+      "name": "garlic",
+      "human_amount": "2 cloves",
+      "machine_amount": {
+        "value": 2,
+        "unit": "pcs",
+        "approximate": false
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11215"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0010",
+      "name": "dried oregano",
+      "human_amount": "pinch",
+      "machine_amount": {
+        "value": 0.5,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "dried",
+      "external_ids": {
+        "USDA": "02027"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "s-01",
+      "human_text": "Dissolve yeast in warm water and let it activate for 5 minutes",
+      "action": "dissolve",
+      "target": ["ing-0003", "ing-0002"],
+      "params": {
+        "time_minutes": 5,
+        "temperature_c": 38,
+        "vessel": "bowl"
+      },
+      "done_when": {
+        "visual": "foamy surface",
+        "volume_increase": 1.2
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-02",
+      "human_text": "Combine flour and salt in a large mixing bowl",
+      "action": "mix",
+      "target": ["ing-0001", "ing-0004"],
+      "params": {
+        "method": "dry-mix",
+        "vessel": "large-bowl"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-03",
+      "human_text": "Add yeast mixture and olive oil to flour, mix to form dough",
+      "action": "combine",
+      "target": ["s-01:result", "s-02:result", "ing-0005"],
+      "params": {
+        "method": "gradual-pour",
+        "mixing_speed": "slow"
+      },
+      "done_when": {
+        "texture": "shaggy-dough"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-04",
+      "human_text": "Knead dough for 10 minutes until smooth and elastic",
+      "action": "knead",
+      "target": ["s-03:result"],
+      "params": {
+        "time_minutes": 10,
+        "method": "hand-kneading",
+        "surface": "floured"
+      },
+      "device_profile_ref": "mixer-01",
+      "done_when": {
+        "texture": {
+          "elasticity": "high",
+          "surface": "smooth",
+          "windowpane_test": "pass"
+        }
+      },
+      "tolerance": {
+        "time_percent": 20
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-05",
+      "human_text": "Let dough rise in oiled bowl for 24 hours in refrigerator",
+      "action": "ferment",
+      "target": ["s-04:result"],
+      "params": {
+        "time_hours": 24,
+        "temperature_c": 4,
+        "humidity_percent": 70,
+        "container": "oiled-bowl",
+        "covered": true
+      },
+      "done_when": {
+        "volume_increase": 2.0,
+        "texture": "airy-with-bubbles"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-06",
+      "human_text": "Divide dough into 2 portions and let rest at room temperature for 1 hour",
+      "action": "divide",
+      "target": ["s-05:result"],
+      "params": {
+        "portions": 2,
+        "weight_per_portion_g": 415,
+        "rest_time_minutes": 60,
+        "temperature_c": 22
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-07",
+      "human_text": "Crush tomatoes by hand, add minced garlic, oregano, and salt",
+      "action": "prepare",
+      "target": ["ing-0006", "ing-0009", "ing-0010"],
+      "params": {
+        "method": "hand-crush",
+        "garlic_prep": "minced",
+        "seasoning": "to-taste"
+      },
+      "done_when": {
+        "consistency": "chunky-sauce"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-08",
+      "human_text": "Stretch dough into 30cm circles, leaving thicker edges",
+      "action": "shape",
+      "target": ["s-06:result"],
+      "params": {
+        "diameter_cm": 30,
+        "thickness_center_mm": 3,
+        "thickness_edge_mm": 10,
+        "method": "hand-stretch"
+      },
+      "device_profile_ref": "dough-press-01",
+      "done_when": {
+        "shape": "circular",
+        "edge": "raised-cornicione"
+      },
+      "hazards": ["sharp-tool"],
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-09",
+      "human_text": "Spread tomato sauce on dough, leaving 2cm border",
+      "action": "spread",
+      "target": ["s-07:result", "s-08:result"],
+      "params": {
+        "coverage": "even",
+        "border_cm": 2,
+        "amount_per_pizza_g": 150
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-10",
+      "human_text": "Tear mozzarella and distribute over sauce",
+      "action": "add",
+      "target": ["ing-0007", "s-09:result"],
+      "params": {
+        "method": "hand-torn",
+        "piece_size_cm": 3,
+        "distribution": "even"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-11",
+      "human_text": "Drizzle with olive oil and add fresh basil leaves",
+      "action": "garnish",
+      "target": ["ing-0005", "ing-0008", "s-10:result"],
+      "params": {
+        "oil_amount_ml": 10,
+        "basil_distribution": "scattered"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-12",
+      "human_text": "Bake in wood-fired oven at 450°C for 90 seconds",
+      "action": "bake",
+      "target": ["s-11:result"],
+      "params": {
+        "temperature_c": 450,
+        "time_seconds": 90,
+        "oven_type": "wood-fired",
+        "position": "center",
+        "rotation": "once-at-45s"
+      },
+      "device_profile_ref": "oven-woodfired-01",
+      "done_when": {
+        "crust_color": {
+          "hsv": {
+            "h": [25, 35],
+            "s": [60, 80],
+            "v": [40, 60]
+          },
+          "description": "golden-brown with charred spots"
+        },
+        "cheese_state": "bubbling",
+        "edge_texture": "puffed-and-charred"
+      },
+      "tolerance": {
+        "temperature_c": 25,
+        "time_seconds": 15
+      },
+      "hazards": ["hot-surface"],
+      "since_version": "0.1"
+    }
+  ],
+  "device_profiles": [
+    {
+      "id": "oven-woodfired-01",
+      "type": "oven",
+      "name": "Traditional Wood-Fired Pizza Oven",
+      "manufacturer": "Forno Bravo",
+      "model": "Casa2G110",
+      "params": {
+        "temperature_range_c": {
+          "min": 400,
+          "max": 500
+        },
+        "heating_method": "wood-fire",
+        "dome_temperature_c": 450,
+        "floor_temperature_c": 400,
+        "preheat_time_minutes": 45
+      },
+      "capabilities": {
+        "temperature_range_c": {
+          "min": 200,
+          "max": 500
+        },
+        "fuel_types": ["wood", "gas"],
+        "capacity": "4-pizzas"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "id": "oven-home-01",
+      "type": "oven",
+      "name": "Home Oven Alternative",
+      "params": {
+        "temperature_c": 250,
+        "mode": "bottom-heat-with-broiler",
+        "pizza_stone": true,
+        "preheat_time_minutes": 30,
+        "bake_time_minutes": 8
+      },
+      "notes": "Use pizza stone on lowest rack, finish with broiler",
+      "since_version": "0.1"
+    },
+    {
+      "id": "mixer-01",
+      "type": "mixer",
+      "name": "Stand Mixer Dough Hook",
+      "manufacturer": "KitchenAid",
+      "model": "Professional 600",
+      "params": {
+        "attachment": "dough-hook",
+        "speed_setting": 2,
+        "time_minutes": 8
+      },
+      "capabilities": {
+        "bowl_capacity_liters": 5.7,
+        "motor_watts": 575
+      },
+      "since_version": "0.1"
+    },
+    {
+      "id": "dough-press-01",
+      "type": "dough_press",
+      "name": "Automated Pizza Dough Press",
+      "manufacturer": "Proluxe",
+      "model": "DP18",
+      "params": {
+        "pressure_bar": 2.5,
+        "temperature_c": 22,
+        "diameter_cm": 30,
+        "thickness_profile": "tapered"
+      },
+      "api_endpoint": "https://api.proluxe.com/devices/dp18",
+      "since_version": "0.1"
+    }
+  ],
+  "sensors": [
+    {
+      "id": "sensor-01",
+      "type": "color",
+      "target": "crust",
+      "spec": {
+        "rgb": {
+          "r": [180, 220],
+          "g": [130, 170],
+          "b": [80, 120]
+        },
+        "calibration": "D65-illuminant"
+      },
+      "priority": "required",
+      "since_version": "0.1"
+    },
+    {
+      "id": "sensor-02",
+      "type": "moisture",
+      "target": "dough-center",
+      "spec": {
+        "percent": 58,
+        "tolerance": 2,
+        "method": "capacitive"
+      },
+      "priority": "recommended",
+      "since_version": "0.1"
+    },
+    {
+      "id": "sensor-03",
+      "type": "texture",
+      "target": "crust-edge",
+      "spec": {
+        "hardness_N": 15,
+        "crispness_Hz": 2000,
+        "measurement_depth_mm": 5
+      },
+      "priority": "optional",
+      "since_version": "0.1"
+    },
+    {
+      "id": "sensor-04",
+      "type": "aroma",
+      "target": "baked-pizza",
+      "spec": {
+        "voc_profile": {
+          "2-acetyl-1-pyrroline": "high",
+          "2-acetylthiazole": "medium",
+          "furaneol": "medium"
+        },
+        "intensity_scale": 8
+      },
+      "priority": "optional",
+      "since_version": "0.1"
+    }
+  ],
+  "images": [
+    {
+      "id": "img-01",
+      "caption": "Finished Margherita pizza with charred crust",
+      "stage": "final",
+      "data_uri": "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAQAcJaQAA3AA/v3AgAA=",
+      "width": 64,
+      "height": 64,
+      "since_version": "0.1"
+    },
+    {
+      "id": "img-02",
+      "caption": "Dough after 24-hour cold fermentation",
+      "stage": "step-05",
+      "data_uri": "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAQAcJaQAA3AA/v3AgAA=",
+      "width": 64,
+      "height": 64,
+      "since_version": "0.1"
+    }
+  ],
+  "compatibility": {
+    "schema_org_jsonld": true,
+    "recommended_archive": "rcipz",
+    "supported_formats": ["json", "cbor", "msgpack"],
+    "compression": "brotli",
+    "signature": {
+      "algorithm": "ed25519",
+      "public_key": "base64-encoded-public-key-here"
+    }
+  },
+  "extensions": {
+    "sustainability": {
+      "carbon_footprint_kg_co2": 2.3,
+      "water_usage_liters": 485,
+      "local_ingredient_percent": 60
+    },
+    "automation": {
+      "fully_automated": false,
+      "robot_compatible": true,
+      "required_sensors": ["temperature", "color", "timer"],
+      "skill_level_required": "intermediate"
+    },
+    "marketplace": {
+      "ingredient_kit_available": true,
+      "kit_provider": "LocalFarmBox",
+      "kit_sku": "KIT-PIZZA-MARG-001",
+      "estimated_cost_usd": 12.50
+    }
+  }
+}

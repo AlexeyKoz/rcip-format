@@ -1,0 +1,38 @@
+[package]
+name = "rcip-validator"
+version = "1.0.0"
+edition = "2021"
+authors = ["Alexey Kozlov <alexey@rcip-format.org>"]
+description = "RCIP Format Validator for Rust"
+license = "MIT"
+repository = "https://github.com/AlexeyKoz/rcip-format"
+homepage = "https://rcip-format.org"
+documentation = "https://docs.rs/rcip-validator"
+keywords = ["rcip", "recipe", "validator", "food", "cooking"]
+categories = ["parsing", "encoding", "data-structures"]
+readme = "README.md"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+jsonschema = "0.17"
+regex = "1.10"
+lazy_static = "1.4"
+clap = { version = "4.4", features = ["derive"] }
+
+[dev-dependencies]
+tempfile = "3.8"
+pretty_assertions = "1.4"
+
+[lib]
+name = "rcip_validator"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rcip-validator"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3

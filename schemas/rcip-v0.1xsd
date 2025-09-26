@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://rcip-format.org/schemas/v0.1"
+           xmlns:rcip="https://rcip-format.org/schemas/v0.1"
+           elementFormDefault="qualified">
+
+  <!-- Root Element -->
+  <xs:element name="recipe" type="rcip:RecipeType"/>
+
+  <!-- Main Recipe Type -->
+  <xs:complexType name="RecipeType">
+    <xs:sequence>
+      <xs:element name="rcip_version" type="xs:string" fixed="0.1"/>
+      <xs:element name="id" type="rcip:RecipeIdType"/>
+      <xs:element name="meta" type="rcip:MetaType"/>
+      <xs:element name="ingredients" type="rcip:IngredientsListType"/>
+      <xs:element name="steps" type="rcip:StepsListType"/>
+      <xs:element name="device_profiles" type="rcip:DeviceProfilesListType" minOccurs="0"/>
+      <xs:element name="sensors" type="rcip:SensorsListType" minOccurs="0"/>
+      <xs:element name="images" type="rcip:ImagesListType" minOccurs="0"/>
+      <xs:element name="compatibility" type="rcip:CompatibilityType" minOccurs="0"/>
+      <xs:element name="extensions" type="rcip:ExtensionsType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Recipe ID Type -->
+  <xs:simpleType name="RecipeIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="rcip-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Meta Type -->
+  <xs:complexType name="MetaType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="author" type="rcip:AuthorType"/>
+      <xs:element name="origin" type="rcip:OriginType" minOccurs="0"/>
+      <xs:element name="servings" type="rcip:ServingsType" minOccurs="0"/>
+      <xs:element name="diet_labels" type="rcip:DietLabelsType" minOccurs="0"/>
+      <xs:element name="keywords" type="rcip:KeywordsType" minOccurs="0"/>
+      <xs:element name="difficulty" type="rcip:DifficultyType" minOccurs="0"/>
+      <xs:element name="prep_time_minutes" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="cook_time_minutes" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="active_time_minutes" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="total_time_minutes" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="created_date" type="xs:dateTime"/>
+      <xs:element name="updated_date" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="version" type="rcip:VersionType" minOccurs="0"/>
+      <xs:element name="license" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Author Type -->
+  <xs:complexType name="AuthorType">
+    <xs:choice>
+      <xs:element name="simple" type="xs:string"/>
+      <xs:element name="detailed">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="email" type="rcip:EmailType" minOccurs="0"/>
+            <xs:element name="organization" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Origin Type -->
+  <xs:complexType name="OriginType">
+    <xs:sequence>
+      <xs:element name="country" type="rcip:CountryCodeType" minOccurs="0"/>
+      <xs:element name="region" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="cuisine_type" type="xs:string" minOccurs="0"/>
+      <xs:element name="traditional" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Servings Type -->
+  <xs:complexType name="ServingsType">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:decimal"/>
+      <xs:element name="unit" type="xs:string" minOccurs="0"/>
+      <xs:element name="adjustable" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Diet Labels Type -->
+  <xs:complexType name="DietLabelsType">
+    <xs:sequence>
+      <xs:element name="label" type="rcip:DietLabelType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Diet Label Enum -->
+  <xs:simpleType name="DietLabelType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="vegetarian"/>
+      <xs:enumeration value="vegan"/>
+      <xs:enumeration value="gluten-free"/>
+      <xs:enumeration value="dairy-free"/>
+      <xs:enumeration value="nut-free"/>
+      <xs:enumeration value="egg-free"/>
+      <xs:enumeration value="soy-free"/>
+      <xs:enumeration value="fish-free"/>
+      <xs:enumeration value="shellfish-free"/>
+      <xs:enumeration value="kosher"/>
+      <xs:enumeration value="halal"/>
+      <xs:enumeration value="low-sodium"/>
+      <xs:enumeration value="low-carb"/>
+      <xs:enumeration value="keto"/>
+      <xs:enumeration value="paleo"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Keywords Type -->
+  <xs:complexType name="KeywordsType">
+    <xs:sequence>
+      <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Difficulty Type -->
+  <xs:simpleType name="DifficultyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="beginner"/>
+      <xs:enumeration value="intermediate"/>
+      <xs:enumeration value="advanced"/>
+      <xs:enumeration value="professional"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Ingredients List -->
+  <xs:complexType name="IngredientsListType">
+    <xs:sequence>
+      <xs:element name="ingredient" type="rcip:IngredientType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Ingredient Type -->
+  <xs:complexType name="IngredientType">
+    <xs:sequence>
+      <xs:element name="id" type="rcip:IngredientIdType"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="human_amount" type="xs:string"/>
+      <xs:element name="machine_amount" type="rcip:MachineAmountType"/>
+      <xs:element name="state" type="xs:string" minOccurs="0"/>
+      <xs:element name="brand" type="xs:string" minOccurs="0"/>
+      <xs:element name="temperature_c" type="rcip:TemperatureRangeType" minOccurs="0"/>
+      <xs:element name="external_ids" type="rcip:ExternalIdsType" minOccurs="0"/>
+      <xs:element name="nutritional" type="rcip:NutritionalType" minOccurs="0"/>
+      <xs:element name="substitutes" type="rcip:SubstitutesType" minOccurs="0"/>
+      <xs:element name="allergens" type="rcip:AllergensType"/>
+      <xs:element name="notes" type="xs:string" minOccurs="0"/>
+      <xs:element name="since_version" type="xs:string" minOccurs="0"/>
+      <xs:element name="deprecated_in" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Ingredient ID Type -->
+  <xs:simpleType name="IngredientIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="ing-[0-9a-zA-Z]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Machine Amount Type -->
+  <xs:complexType name="MachineAmountType">
+    <xs:sequence>
+      <xs:element name="value" type="xs:decimal"/>
+      <xs:element name="unit" type="rcip:UnitType"/>
+      <xs:element name="approximate" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="tolerance" type="rcip:ToleranceType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Unit Type -->
+  <xs:simpleType name="UnitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mg"/>
+      <xs:enumeration value="g"/>
+      <xs:enumeration value="kg"/>
+      <xs:enumeration value="ml"/>
+      <xs:enumeration value="l"/>
+      <xs:enumeration value="tsp"/>
+      <xs:enumeration value="tbsp"/>
+      <xs:enumeration value="cup"/>
+      <xs:enumeration value="fl-oz"/>
+      <xs:enumeration value="pt"/>
+      <xs:enumeration value="qt"/>
+      <xs:enumeration value="gal"/>
+      <xs:enumeration value="oz"/>
+      <xs:enumeration value="lb"/>
+      <xs:enumeration value="pcs"/>
+      <xs:enumeration value="dozen"/>
+      <xs:enumeration value="pinch"/>
+      <xs:enumeration value="dash"/>
+      <xs:enumeration value="handful"/>
+      <xs:enumeration value="to-taste"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Tolerance Type -->
+  <xs:complexType name="ToleranceType">
+    <xs:sequence>
+      <xs:element name="min" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="max" type="xs:decimal" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Temperature Range Type -->
+  <xs:complexType name="TemperatureRangeType">
+    <xs:sequence>
+      <xs:element name="min" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="max" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="unit" type="rcip:TempUnitType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Temperature Unit Type -->
+  <xs:simpleType name="TempUnitType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="C"/>
+      <xs:enumeration value="F"/>
+      <xs:enumeration value="K"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- External IDs Type -->
+  <xs:complexType name="ExternalIdsType">
+    <xs:sequence>
+      <xs:element name="GTIN" type="xs:string" minOccurs="0"/>
+      <xs:element name="USDA" type="xs:string" minOccurs="0"/>
+      <xs:element name="OpenFoodFacts" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Nutritional Type -->
+  <xs:complexType name="NutritionalType">
+    <xs:sequence>
+      <xs:element name="per_100g" type="rcip:NutrientValuesType" minOccurs="0"/>
+      <xs:element name="per_serving" type="rcip:NutrientValuesType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Nutrient Values Type -->
+  <xs:complexType name="NutrientValuesType">
+    <xs:sequence>
+      <xs:element name="calories" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="protein" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="carbs" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="fat" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="saturated_fat" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="fiber" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="sugar" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="sodium" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="calcium" type="xs:decimal" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Substitutes Type -->
+  <xs:complexType name="SubstitutesType">
+    <xs:sequence>
+      <xs:element name="substitute" type="rcip:SubstituteType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Substitute Type -->
+  <xs:complexType name="SubstituteType">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="ratio" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="notes" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Allergens Type -->
+  <xs:complexType name="AllergensType">
+    <xs:sequence>
+      <xs:element name="allergen" type="rcip:AllergenType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Allergen Type -->
+  <xs:simpleType name="AllergenType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="milk"/>
+      <xs:enumeration value="eggs"/>
+      <xs:enumeration value="fish"/>
+      <xs:enumeration value="shellfish"/>
+      <xs:enumeration value="tree-nuts"/>
+      <xs:enumeration value="peanuts"/>
+      <xs:enumeration value="wheat"/>
+      <xs:enumeration value="gluten"/>
+      <xs:enumeration value="soybeans"/>
+      <xs:enumeration value="sesame"/>
+      <xs:enumeration value="celery"/>
+      <xs:enumeration value="mustard"/>
+      <xs:enumeration value="molluscs"/>
+      <xs:enumeration value="lupins"/>
+      <xs:enumeration value="sulphites"/>
+      <xs:enumeration value="lactose"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Steps List -->
+  <xs:complexType name="StepsListType">
+    <xs:sequence>
+      <xs:element name="step" type="rcip:StepType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Step Type -->
+  <xs:complexType name="StepType">
+    <xs:sequence>
+      <xs:element name="step_id" type="rcip:StepIdType"/>
+      <xs:element name="human_text" type="xs:string"/>
+      <xs:element name="action" type="rcip:ActionType"/>
+      <xs:element name="target" type="rcip:TargetsType" minOccurs="0"/>
+      <xs:element name="params" type="rcip:ParamsType" minOccurs="0"/>
+      <xs:element name="device_profile_ref" type="xs:string" minOccurs="0"/>
+      <xs:element name="done_when" type="rcip:DoneWhenType" minOccurs="0"/>
+      <xs:element name="tolerance" type="rcip:ToleranceGenericType" minOccurs="0"/>
+      <xs:element name="hazards" type="rcip:HazardsType" minOccurs="0"/>
+      <xs:element name="since_version" type="xs:string" minOccurs="0"/>
+      <xs:element name="deprecated_in" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Step ID Type -->
+  <xs:simpleType name="StepIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="s-[0-9a-zA-Z]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Action Type -->
+  <xs:simpleType name="ActionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="add"/>
+      <xs:enumeration value="mix"/>
+      <xs:enumeration value="combine"/>
+      <xs:enumeration value="blend"/>
+      <xs:enumeration value="cut"/>
+      <xs:enumeration value="slice"/>
+      <xs:enumeration value="dice"/>
+      <xs:enumeration value="chop"/>
+      <xs:enumeration value="mince"/>
+      <xs:enumeration value="heat"/>
+      <xs:enumeration value="boil"/>
+      <xs:enumeration value="simmer"/>
+      <xs:enumeration value="steam"/>
+      <xs:enumeration value="fry"/>
+      <xs:enumeration value="saute"/>
+      <xs:enumeration value="bake"/>
+      <xs:enumeration value="roast"/>
+      <xs:enumeration value="grill"/>
+      <xs:enumeration value="cool"/>
+      <xs:enumeration value="chill"/>
+      <xs:enumeration value="freeze"/>
+      <xs:enumeration value="knead"/>
+      <xs:enumeration value="fold"/>
+      <xs:enumeration value="roll"/>
+      <xs:enumeration value="shape"/>
+      <xs:enumeration value="ferment"/>
+      <xs:enumeration value="proof"/>
+      <xs:enumeration value="rest"/>
+      <xs:enumeration value="strain"/>
+      <xs:enumeration value="filter"/>
+      <xs:enumeration value="separate"/>
+      <xs:enumeration value="measure"/>
+      <xs:enumeration value="weigh"/>
+      <xs:enumeration value="wait"/>
+      <xs:enumeration value="dissolve"/>
+      <xs:enumeration value="prepare"/>
+      <xs:enumeration value="spread"/>
+      <xs:enumeration value="garnish"/>
+      <xs:enumeration value="divide"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Other complex types -->
+  <xs:complexType name="TargetsType">
+    <xs:sequence>
+      <xs:element name="target" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ParamsType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DoneWhenType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ToleranceGenericType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="HazardsType">
+    <xs:sequence>
+      <xs:element name="hazard" type="rcip:HazardType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="HazardType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hot-surface"/>
+      <xs:enumeration value="sharp-tool"/>
+      <xs:enumeration value="electrical"/>
+      <xs:enumeration value="chemical"/>
+      <xs:enumeration value="pressure"/>
+      <xs:enumeration value="allergen-cross-contact"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Device Profiles List -->
+  <xs:complexType name="DeviceProfilesListType">
+    <xs:sequence>
+      <xs:element name="device_profile" type="rcip:DeviceProfileType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Device Profile Type -->
+  <xs:complexType name="DeviceProfileType">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="type" type="rcip:DeviceTypeEnum"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="manufacturer" type="xs:string" minOccurs="0"/>
+      <xs:element name="model" type="xs:string" minOccurs="0"/>
+      <xs:element name="params" type="rcip:ParamsType" minOccurs="0"/>
+      <xs:element name="capabilities" type="rcip:ParamsType" minOccurs="0"/>
+      <xs:element name="api_endpoint" type="xs:anyURI" minOccurs="0"/>
+      <xs:element name="since_version" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Device Type Enum -->
+  <xs:simpleType name="DeviceTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="oven"/>
+      <xs:enumeration value="stovetop"/>
+      <xs:enumeration value="mixer"/>
+      <xs:enumeration value="blender"/>
+      <xs:enumeration value="scale"/>
+      <xs:enumeration value="thermometer"/>
+      <xs:enumeration value="timer"/>
+      <xs:enumeration value="cutter"/>
+      <xs:enumeration value="printer_3d_food"/>
+      <xs:enumeration value="dispenser"/>
+      <xs:enumeration value="sous_vide"/>
+      <xs:enumeration value="pressure_cooker"/>
+      <xs:enumeration value="dough_press"/>
+      <xs:enumeration value="immersion_circulator"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Sensors List -->
+  <xs:complexType name="SensorsListType">
+    <xs:sequence>
+      <xs:element name="sensor" type="rcip:SensorType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Sensor Type -->
+  <xs:complexType name="SensorType">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="type" type="rcip:SensorTypeEnum"/>
+      <xs:element name="target" type="xs:string"/>
+      <xs:element name="spec" type="rcip:ParamsType" minOccurs="0"/>
+      <xs:element name="priority" type="rcip:PriorityType" minOccurs="0"/>
+      <xs:element name="since_version" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Sensor Type Enum -->
+  <xs:simpleType name="SensorTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="color"/>
+      <xs:enumeration value="temperature"/>
+      <xs:enumeration value="moisture"/>
+      <xs:enumeration value="texture"/>
+      <xs:enumeration value="aroma"/>
+      <xs:enumeration value="weight"/>
+      <xs:enumeration value="volume"/>
+      <xs:enumeration value="ph"/>
+      <xs:enumeration value="conductivity"/>
+      <xs:enumeration value="viscosity"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Priority Type -->
+  <xs:simpleType name="PriorityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="required"/>
+      <xs:enumeration value="optional"/>
+      <xs:enumeration value="recommended"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Images List -->
+  <xs:complexType name="ImagesListType">
+    <xs:sequence>
+      <xs:element name="image" type="rcip:ImageType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Image Type -->
+  <xs:complexType name="ImageType">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string"/>
+      <xs:element name="caption" type="xs:string" minOccurs="0"/>
+      <xs:element name="stage" type="xs:string" minOccurs="0"/>
+      <xs:element name="data_uri" type="xs:string" minOccurs="0"/>
+      <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+      <xs:element name="width" type="xs:positiveInteger" minOccurs="0"/>
+      <xs:element name="height" type="xs:positiveInteger" minOccurs="0"/>
+      <xs:element name="since_version" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Compatibility Type -->
+  <xs:complexType name="CompatibilityType">
+    <xs:sequence>
+      <xs:element name="schema_org_jsonld" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="recommended_archive" type="rcip:ArchiveType" minOccurs="0"/>
+      <xs:element name="supported_formats" type="rcip:FormatsType" minOccurs="0"/>
+      <xs:element name="compression" type="xs:string" minOccurs="0"/>
+      <xs:element name="signature" type="rcip:SignatureType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Archive Type -->
+  <xs:simpleType name="ArchiveType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="rcipz"/>
+      <xs:enumeration value="rcipb"/>
+      <xs:enumeration value="none"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Formats Type -->
+  <xs:complexType name="FormatsType">
+    <xs:sequence>
+      <xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Signature Type -->
+  <xs:complexType name="SignatureType">
+    <xs:sequence>
+      <xs:element name="algorithm" type="xs:string" minOccurs="0"/>
+      <xs:element name="public_key" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Extensions Type -->
+  <xs:complexType name="ExtensionsType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Helper Types -->
+  <xs:simpleType name="EmailType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@]+@[^@]+\.[^@]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CountryCodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="VersionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d+\.\d+\.\d+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,658 @@
+{
+  "rcip_version": "0.1",
+  "id": "rcip-7d4e0120-93a5-4b8c-8f91-2c3d4e5f6789",
+  "meta": {
+    "name": "Ukrainian Borscht",
+    "description": "Traditional Ukrainian red beet soup with beef, vegetables, and sour cream. A hearty, nutritious meal perfect for cold days",
+    "author": {
+      "name": "Maria Petrenko",
+      "email": "maria@ukrainiancuisine.ua",
+      "organization": "Ukrainian Culinary Heritage Foundation"
+    },
+    "origin": {
+      "country": "UA",
+      "region": "Kyiv Oblast",
+      "cuisine_type": "Ukrainian",
+      "traditional": true
+    },
+    "servings": {
+      "amount": 8,
+      "unit": "portions",
+      "adjustable": true
+    },
+    "diet_labels": ["gluten-free"],
+    "keywords": ["soup", "ukrainian", "borscht", "beets", "traditional", "winter", "comfort-food"],
+    "difficulty": "intermediate",
+    "prep_time_minutes": 30,
+    "cook_time_minutes": 150,
+    "active_time_minutes": 45,
+    "total_time_minutes": 180,
+    "created_date": "2025-01-15T14:00:00Z",
+    "updated_date": "2025-01-15T14:00:00Z",
+    "version": "2.1.0",
+    "license": "CC-BY-SA-4.0"
+  },
+  "ingredients": [
+    {
+      "id": "ing-0001",
+      "name": "beef with bone",
+      "human_amount": "500g",
+      "machine_amount": {
+        "value": 500,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "13298"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 250,
+          "protein": 26,
+          "fat": 15,
+          "saturated_fat": 6
+        }
+      },
+      "allergens": [],
+      "notes": "Beef shank or short ribs work best",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0002",
+      "name": "beets",
+      "human_amount": "2 medium",
+      "machine_amount": {
+        "value": 300,
+        "unit": "g",
+        "approximate": true,
+        "tolerance": {
+          "min": 250,
+          "max": 350
+        }
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11080",
+        "OpenFoodFacts": "3017620422004"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 43,
+          "carbs": 10,
+          "fiber": 2.8,
+          "sugar": 7
+        }
+      },
+      "allergens": [],
+      "notes": "Deep red color preferred",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0003",
+      "name": "white cabbage",
+      "human_amount": "300g",
+      "machine_amount": {
+        "value": 300,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "fresh-shredded",
+      "external_ids": {
+        "USDA": "11109"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0004",
+      "name": "carrots",
+      "human_amount": "1 large",
+      "machine_amount": {
+        "value": 150,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11124"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 41,
+          "carbs": 10,
+          "fiber": 2.8,
+          "vitamin_a_iu": 16706
+        }
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0005",
+      "name": "onion",
+      "human_amount": "1 medium",
+      "machine_amount": {
+        "value": 150,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11282"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0006",
+      "name": "potatoes",
+      "human_amount": "2 medium",
+      "machine_amount": {
+        "value": 300,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11362"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0007",
+      "name": "tomato paste",
+      "human_amount": "2 tablespoons",
+      "machine_amount": {
+        "value": 30,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "canned",
+      "external_ids": {
+        "USDA": "11546"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0008",
+      "name": "garlic",
+      "human_amount": "3 cloves",
+      "machine_amount": {
+        "value": 3,
+        "unit": "pcs",
+        "approximate": false
+      },
+      "state": "fresh",
+      "external_ids": {
+        "USDA": "11215"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0009",
+      "name": "sunflower oil",
+      "human_amount": "3 tablespoons",
+      "machine_amount": {
+        "value": 45,
+        "unit": "ml",
+        "approximate": false
+      },
+      "state": "liquid",
+      "external_ids": {
+        "USDA": "04506"
+      },
+      "allergens": [],
+      "notes": "Traditional Ukrainian cooking oil",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0010",
+      "name": "bay leaves",
+      "human_amount": "2 leaves",
+      "machine_amount": {
+        "value": 2,
+        "unit": "pcs",
+        "approximate": false
+      },
+      "state": "dried",
+      "external_ids": {
+        "USDA": "02004"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0011",
+      "name": "black pepper",
+      "human_amount": "1/2 teaspoon",
+      "machine_amount": {
+        "value": 2,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "ground",
+      "external_ids": {
+        "USDA": "02030"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0012",
+      "name": "salt",
+      "human_amount": "to taste",
+      "machine_amount": {
+        "value": 15,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fine",
+      "external_ids": {
+        "USDA": "02047"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0013",
+      "name": "white vinegar",
+      "human_amount": "1 tablespoon",
+      "machine_amount": {
+        "value": 15,
+        "unit": "ml",
+        "approximate": false
+      },
+      "state": "liquid",
+      "external_ids": {
+        "USDA": "02048"
+      },
+      "allergens": [],
+      "notes": "Preserves beet color",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0014",
+      "name": "sugar",
+      "human_amount": "1 teaspoon",
+      "machine_amount": {
+        "value": 5,
+        "unit": "g",
+        "approximate": false
+      },
+      "state": "granulated",
+      "external_ids": {
+        "USDA": "19335"
+      },
+      "allergens": [],
+      "notes": "Balances acidity",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0015",
+      "name": "water",
+      "human_amount": "3 liters",
+      "machine_amount": {
+        "value": 3000,
+        "unit": "ml",
+        "approximate": false
+      },
+      "state": "cold",
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0016",
+      "name": "sour cream",
+      "human_amount": "for serving",
+      "machine_amount": {
+        "value": 200,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "cold",
+      "external_ids": {
+        "USDA": "01056"
+      },
+      "allergens": ["milk", "lactose"],
+      "notes": "20% fat content preferred",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0017",
+      "name": "fresh dill",
+      "human_amount": "handful",
+      "machine_amount": {
+        "value": 10,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fresh-chopped",
+      "external_ids": {
+        "USDA": "02045"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0018",
+      "name": "fresh parsley",
+      "human_amount": "handful",
+      "machine_amount": {
+        "value": 10,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fresh-chopped",
+      "external_ids": {
+        "USDA": "11297"
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "s-01",
+      "human_text": "Place beef in cold water, bring to boil and cook for 1.5 hours to make broth",
+      "action": "boil",
+      "target": ["ing-0001", "ing-0015"],
+      "params": {
+        "time_minutes": 90,
+        "temperature_c": 100,
+        "vessel": "large-pot",
+        "volume_liters": 3
+      },
+      "done_when": {
+        "meat_texture": "tender",
+        "broth_color": "rich-brown"
+      },
+      "hazards": ["hot-surface"],
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-02",
+      "human_text": "Remove foam from broth surface periodically",
+      "action": "strain",
+      "target": ["s-01:result"],
+      "params": {
+        "method": "skim-foam",
+        "frequency": "as-needed"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-03",
+      "human_text": "Peel and grate beets, sauté with vinegar to preserve color",
+      "action": "saute",
+      "target": ["ing-0002", "ing-0013"],
+      "params": {
+        "time_minutes": 15,
+        "temperature_c": 120,
+        "oil_amount_ml": 15,
+        "method": "medium-heat"
+      },
+      "done_when": {
+        "beet_texture": "softened",
+        "color": "bright-red"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-04",
+      "human_text": "Dice onion and grate carrot, sauté until golden",
+      "action": "saute",
+      "target": ["ing-0005", "ing-0004", "ing-0009"],
+      "params": {
+        "time_minutes": 10,
+        "temperature_c": 140,
+        "onion_size_mm": 5,
+        "carrot_prep": "grated"
+      },
+      "done_when": {
+        "onion_color": "translucent",
+        "carrot_state": "softened"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-05",
+      "human_text": "Add tomato paste to onion-carrot mix and cook for 3 minutes",
+      "action": "fry",
+      "target": ["s-04:result", "ing-0007"],
+      "params": {
+        "time_minutes": 3,
+        "temperature_c": 120,
+        "stirring": "constant"
+      },
+      "done_when": {
+        "color": "deep-red",
+        "aroma": "rich-tomato"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-06",
+      "human_text": "Remove meat from broth, cut into pieces, strain broth",
+      "action": "separate",
+      "target": ["s-02:result"],
+      "params": {
+        "meat_size_cm": 2,
+        "straining_method": "fine-mesh"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-07",
+      "human_text": "Add diced potatoes to strained broth, cook for 10 minutes",
+      "action": "boil",
+      "target": ["s-06:broth", "ing-0006"],
+      "params": {
+        "time_minutes": 10,
+        "potato_size_cm": 1.5,
+        "temperature_c": 100
+      },
+      "done_when": {
+        "potato_texture": "slightly-firm"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-08",
+      "human_text": "Add shredded cabbage to pot, cook for 5 minutes",
+      "action": "add",
+      "target": ["s-07:result", "ing-0003"],
+      "params": {
+        "time_minutes": 5,
+        "cabbage_thickness_mm": 3
+      },
+      "done_when": {
+        "cabbage_texture": "tender-crisp"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-09",
+      "human_text": "Add sautéed vegetables (beets, onion-carrot-tomato mix) to pot",
+      "action": "combine",
+      "target": ["s-08:result", "s-03:result", "s-05:result"],
+      "params": {
+        "mixing_method": "gentle-stir",
+        "time_minutes": 2
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-10",
+      "human_text": "Return meat pieces to pot, add bay leaves and seasonings",
+      "action": "add",
+      "target": ["s-09:result", "s-06:meat", "ing-0010", "ing-0011", "ing-0012", "ing-0014"],
+      "params": {
+        "seasoning_method": "to-taste",
+        "stirring": "gentle"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-11",
+      "human_text": "Simmer for 10 minutes, add minced garlic",
+      "action": "simmer",
+      "target": ["s-10:result", "ing-0008"],
+      "params": {
+        "time_minutes": 10,
+        "temperature_c": 90,
+        "garlic_prep": "minced",
+        "garlic_timing": "last-2-minutes"
+      },
+      "done_when": {
+        "flavor_profile": "balanced",
+        "color": "deep-red"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-12",
+      "human_text": "Turn off heat, let rest for 15 minutes, add fresh herbs",
+      "action": "rest",
+      "target": ["s-11:result", "ing-0017", "ing-0018"],
+      "params": {
+        "time_minutes": 15,
+        "covered": true,
+        "herb_timing": "after-resting"
+      },
+      "done_when": {
+        "flavors": "melded",
+        "temperature_c": 75
+      },
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-13",
+      "human_text": "Serve hot with sour cream and fresh dill",
+      "action": "garnish",
+      "target": ["s-12:result", "ing-0016", "ing-0017"],
+      "params": {
+        "serving_temperature_c": 70,
+        "sour_cream_amount_g": 25,
+        "presentation": "dollop-on-top"
+      },
+      "since_version": "0.1"
+    }
+  ],
+  "device_profiles": [
+    {
+      "id": "stovetop-01",
+      "type": "stovetop",
+      "name": "Gas Range",
+      "params": {
+        "burner_size": "large",
+        "heat_levels": 10,
+        "btus": 15000
+      },
+      "capabilities": {
+        "temperature_range_c": {
+          "min": 40,
+          "max": 250
+        },
+        "heat_distribution": "flame"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "id": "pot-01",
+      "type": "cookware",
+      "name": "Stock Pot",
+      "params": {
+        "volume_liters": 5,
+        "material": "stainless-steel",
+        "lid": true
+      },
+      "since_version": "0.1"
+    }
+  ],
+  "sensors": [
+    {
+      "id": "sensor-01",
+      "type": "temperature",
+      "target": "broth",
+      "spec": {
+        "range_c": [85, 100],
+        "precision": 0.5
+      },
+      "priority": "recommended",
+      "since_version": "0.1"
+    },
+    {
+      "id": "sensor-02",
+      "type": "color",
+      "target": "borscht",
+      "spec": {
+        "rgb": {
+          "r": [150, 180],
+          "g": [20, 40],
+          "b": [30, 50]
+        },
+        "description": "deep-red-burgundy"
+      },
+      "priority": "optional",
+      "since_version": "0.1"
+    },
+    {
+      "id": "sensor-03",
+      "type": "ph",
+      "target": "final-soup",
+      "spec": {
+        "range": [4.5, 5.5],
+        "optimal": 5.0
+      },
+      "priority": "optional",
+      "notes": "Balanced sweet-sour taste",
+      "since_version": "0.1"
+    }
+  ],
+  "compatibility": {
+    "schema_org_jsonld": true,
+    "recommended_archive": "rcipz",
+    "supported_formats": ["json", "yaml", "xml"],
+    "compression": "gzip"
+  },
+  "extensions": {
+    "cultural": {
+      "significance": "National dish of Ukraine",
+      "unesco_heritage": "Intangible Cultural Heritage",
+      "serving_tradition": "Often served with pampushky (garlic bread)",
+      "seasonal": "year-round, especially winter"
+    },
+    "nutrition_highlights": {
+      "health_benefits": [
+        "High in vitamins A, C, K",
+        "Rich in iron and folate from beets",
+        "Probiotic benefits from fermented version",
+        "High fiber content"
+      ],
+      "dietary_info": {
+        "calories_per_serving": 320,
+        "protein_g": 18,
+        "fiber_g": 6,
+        "vitamin_c_percent_dv": 45
+      }
+    },
+    "variations": {
+      "regional": [
+        {
+          "name": "Green Borscht",
+          "region": "Western Ukraine",
+          "key_difference": "Uses sorrel instead of beets"
+        },
+        {
+          "name": "Cold Borscht",
+          "region": "Summer variation",
+          "key_difference": "Served chilled with kefir"
+        }
+      ]
+    }
+  }
+}

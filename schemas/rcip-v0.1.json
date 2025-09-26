@@ -1,0 +1,702 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rcip-format.org/schemas/rcip-v0.1.json",
+  "title": "RCIP Recipe Format",
+  "description": "Recipe Interchange Protocol (RCIP) - Universal Recipe Format v0.1 created by Alexey Kozlov",
+  "type": "object",
+  "required": [
+    "rcip_version",
+    "id",
+    "meta",
+    "ingredients",
+    "steps"
+  ],
+  "properties": {
+    "rcip_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "RCIP format version"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^rcip-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Unique recipe identifier (UUID v4 format)"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "ingredients": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ingredient"
+      },
+      "description": "List of recipe ingredients"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/step"
+      },
+      "description": "Cooking instructions"
+    },
+    "device_profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/deviceProfile"
+      },
+      "description": "Device-specific parameters"
+    },
+    "sensors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sensor"
+      },
+      "description": "Sensor specifications for quality control"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/image"
+      },
+      "description": "Recipe images"
+    },
+    "compatibility": {
+      "$ref": "#/$defs/compatibility"
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Custom extensions"
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "required": ["name", "author", "created_date"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Recipe name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief recipe description"
+        },
+        "author": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                },
+                "organization": {
+                  "type": "string"
+                }
+              },
+              "required": ["name"]
+            }
+          ],
+          "description": "Recipe author information"
+        },
+        "origin": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "description": "ISO 3166-1 alpha-2 country code"
+            },
+            "region": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "cuisine_type": {
+              "type": "string"
+            },
+            "traditional": {
+              "type": "boolean"
+            }
+          }
+        },
+        "servings": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "minimum": 0
+            },
+            "unit": {
+              "type": "string"
+            },
+            "adjustable": {
+              "type": "boolean"
+            }
+          },
+          "required": ["amount"]
+        },
+        "diet_labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "vegetarian",
+              "vegan",
+              "gluten-free",
+              "dairy-free",
+              "nut-free",
+              "egg-free",
+              "soy-free",
+              "fish-free",
+              "shellfish-free",
+              "kosher",
+              "halal",
+              "low-sodium",
+              "low-carb",
+              "keto",
+              "paleo"
+            ]
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced", "professional"]
+        },
+        "prep_time_minutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cook_time_minutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "active_time_minutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total_time_minutes": {
+          "type": "number",
+          "minimum": 0
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "license": {
+          "type": "string"
+        }
+      }
+    },
+    "ingredient": {
+      "type": "object",
+      "required": ["id", "name", "human_amount", "machine_amount", "allergens"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ing-[0-9a-zA-Z]+$",
+          "description": "Unique ingredient identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_amount": {
+          "type": "string",
+          "description": "Human-readable amount"
+        },
+        "machine_amount": {
+          "$ref": "#/$defs/machineAmount"
+        },
+        "state": {
+          "type": "string",
+          "description": "Physical state (fresh, frozen, dried, etc.)"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "temperature_c": {
+          "$ref": "#/$defs/temperatureRange"
+        },
+        "external_ids": {
+          "type": "object",
+          "properties": {
+            "GTIN": {
+              "type": "string"
+            },
+            "USDA": {
+              "type": "string"
+            },
+            "OpenFoodFacts": {
+              "type": "string"
+            }
+          }
+        },
+        "nutritional": {
+          "$ref": "#/$defs/nutritional"
+        },
+        "substitutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/substitute"
+          }
+        },
+        "allergens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "milk",
+              "eggs",
+              "fish",
+              "shellfish",
+              "tree-nuts",
+              "peanuts",
+              "wheat",
+              "gluten",
+              "soybeans",
+              "sesame",
+              "celery",
+              "mustard",
+              "molluscs",
+              "lupins",
+              "sulphites",
+              "lactose"
+            ]
+          },
+          "description": "MANDATORY: List of allergens (can be empty array)"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "since_version": {
+          "type": "string"
+        },
+        "deprecated_in": {
+          "type": "string"
+        }
+      }
+    },
+    "machineAmount": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "mg", "g", "kg",
+            "ml", "l",
+            "tsp", "tbsp", "cup", "fl-oz", "pt", "qt", "gal",
+            "oz", "lb",
+            "pcs", "dozen",
+            "pinch", "dash", "handful", "to-taste"
+          ]
+        },
+        "approximate": {
+          "type": "boolean",
+          "default": false
+        },
+        "tolerance": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "number"
+            },
+            "max": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "temperatureRange": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["C", "F", "K"],
+          "default": "C"
+        }
+      }
+    },
+    "nutritional": {
+      "type": "object",
+      "properties": {
+        "per_100g": {
+          "type": "object",
+          "properties": {
+            "calories": {
+              "type": "number",
+              "minimum": 0
+            },
+            "protein": {
+              "type": "number",
+              "minimum": 0
+            },
+            "carbs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "fat": {
+              "type": "number",
+              "minimum": 0
+            },
+            "saturated_fat": {
+              "type": "number",
+              "minimum": 0
+            },
+            "fiber": {
+              "type": "number",
+              "minimum": 0
+            },
+            "sugar": {
+              "type": "number",
+              "minimum": 0
+            },
+            "sodium": {
+              "type": "number",
+              "minimum": 0
+            },
+            "calcium": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "per_serving": {
+          "$ref": "#/$defs/nutritional/properties/per_100g"
+        }
+      }
+    },
+    "substitute": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["step_id", "human_text", "action"],
+      "properties": {
+        "step_id": {
+          "type": "string",
+          "pattern": "^s-[0-9a-zA-Z]+$"
+        },
+        "human_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "add", "mix", "combine", "blend",
+            "cut", "slice", "dice", "chop", "mince",
+            "heat", "boil", "simmer", "steam", "fry", "saute", "bake", "roast", "grill",
+            "cool", "chill", "freeze",
+            "knead", "fold", "roll", "shape",
+            "ferment", "proof", "rest",
+            "strain", "filter", "separate",
+            "measure", "weigh",
+            "wait", "dissolve", "prepare", "spread", "garnish", "divide"
+          ]
+        },
+        "target": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ingredient IDs or step results"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "time_minutes": {
+              "type": "number",
+              "minimum": 0
+            },
+            "time_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "time_hours": {
+              "type": "number",
+              "minimum": 0
+            },
+            "temperature_c": {
+              "type": "number"
+            },
+            "temperature_f": {
+              "type": "number"
+            },
+            "speed_rpm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "pressure_bar": {
+              "type": "number",
+              "minimum": 0
+            },
+            "method": {
+              "type": "string"
+            },
+            "vessel": {
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            }
+          }
+        },
+        "device_profile_ref": {
+          "type": "string"
+        },
+        "done_when": {
+          "type": "object",
+          "properties": {
+            "texture": {
+              "type": ["string", "object"]
+            },
+            "color": {
+              "type": "object"
+            },
+            "temperature_c": {
+              "type": "number"
+            },
+            "time_elapsed_minutes": {
+              "type": "number"
+            },
+            "visual": {
+              "type": "string"
+            },
+            "volume_increase": {
+              "type": "number"
+            }
+          }
+        },
+        "tolerance": {
+          "type": "object"
+        },
+        "hazards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "hot-surface",
+              "sharp-tool",
+              "electrical",
+              "chemical",
+              "pressure",
+              "allergen-cross-contact"
+            ]
+          }
+        },
+        "since_version": {
+          "type": "string"
+        },
+        "deprecated_in": {
+          "type": "string"
+        }
+      }
+    },
+    "deviceProfile": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "oven",
+            "stovetop",
+            "mixer",
+            "blender",
+            "scale",
+            "thermometer",
+            "timer",
+            "cutter",
+            "printer_3d_food",
+            "dispenser",
+            "sous_vide",
+            "pressure_cooker",
+            "dough_press",
+            "immersion_circulator"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        },
+        "capabilities": {
+          "type": "object"
+        },
+        "api_endpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "since_version": {
+          "type": "string"
+        }
+      }
+    },
+    "sensor": {
+      "type": "object",
+      "required": ["id", "type", "target"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "color",
+            "temperature",
+            "moisture",
+            "texture",
+            "aroma",
+            "weight",
+            "volume",
+            "ph",
+            "conductivity",
+            "viscosity"
+          ]
+        },
+        "target": {
+          "type": "string"
+        },
+        "spec": {
+          "type": "object"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["required", "optional", "recommended"]
+        },
+        "since_version": {
+          "type": "string"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "data_uri": {
+          "type": "string",
+          "pattern": "^data:"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "since_version": {
+          "type": "string"
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "schema_org_jsonld": {
+          "type": "boolean"
+        },
+        "recommended_archive": {
+          "type": "string",
+          "enum": ["rcipz", "rcipb", "none"]
+        },
+        "supported_formats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compression": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "object",
+          "properties": {
+            "algorithm": {
+              "type": "string"
+            },
+            "public_key": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

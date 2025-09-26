@@ -1,0 +1,253 @@
+{
+  "rcip_version": "0.1",
+  "id": "rcip-123e4567-e89b-12d3-a456-426614174000",
+  "meta": {
+    "name": "Perfect Soft-Boiled Egg",
+    "description": "Simple recipe demonstrating minimal RCIP format requirements. Perfect soft-boiled egg with runny yolk and set white",
+    "author": "Home Cook",
+    "servings": {
+      "amount": 1,
+      "unit": "egg"
+    },
+    "diet_labels": ["vegetarian", "gluten-free", "dairy-free", "nut-free"],
+    "keywords": ["egg", "breakfast", "simple", "quick"],
+    "difficulty": "beginner",
+    "prep_time_minutes": 1,
+    "cook_time_minutes": 7,
+    "total_time_minutes": 8,
+    "created_date": "2025-01-15T08:00:00Z",
+    "version": "1.0.0"
+  },
+  "ingredients": [
+    {
+      "id": "ing-0001",
+      "name": "large egg",
+      "human_amount": "1 egg",
+      "machine_amount": {
+        "value": 1,
+        "unit": "pcs"
+      },
+      "state": "refrigerated",
+      "temperature_c": {
+        "min": 4,
+        "max": 8
+      },
+      "external_ids": {
+        "USDA": "01123"
+      },
+      "nutritional": {
+        "per_100g": {
+          "calories": 155,
+          "protein": 13,
+          "fat": 11,
+          "cholesterol": 373
+        }
+      },
+      "allergens": ["eggs"],
+      "notes": "Room temperature eggs cook more evenly",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0002",
+      "name": "water",
+      "human_amount": "enough to cover egg",
+      "machine_amount": {
+        "value": 500,
+        "unit": "ml",
+        "approximate": true
+      },
+      "allergens": [],
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0003",
+      "name": "salt",
+      "human_amount": "pinch (optional)",
+      "machine_amount": {
+        "value": 1,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "fine",
+      "allergens": [],
+      "notes": "For serving, not cooking",
+      "since_version": "0.1"
+    },
+    {
+      "id": "ing-0004",
+      "name": "black pepper",
+      "human_amount": "pinch (optional)",
+      "machine_amount": {
+        "value": 0.5,
+        "unit": "g",
+        "approximate": true
+      },
+      "state": "ground",
+      "allergens": [],
+      "notes": "Freshly ground preferred",
+      "since_version": "0.1"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "s-01",
+      "human_text": "Bring water to a rolling boil in a small saucepan",
+      "action": "boil",
+      "target": ["ing-0002"],
+      "params": {
+        "temperature_c": 100,
+        "vessel": "saucepan",
+        "heat_level": "high"
+      },
+      "done_when": {
+        "visual": "rolling boil",
+        "bubbles": "vigorous"
+      },
+      "hazards": ["hot-surface"],
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-02",
+      "human_text": "Gently lower egg into boiling water using a spoon",
+      "action": "add",
+      "target": ["ing-0001", "s-01:result"],
+      "params": {
+        "method": "gentle-lower",
+        "tool": "spoon"
+      },
+      "notes": "Prevents cracking",
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-03",
+      "human_text": "Cook for exactly 6.5 minutes for runny yolk",
+      "action": "boil",
+      "target": ["s-02:result"],
+      "params": {
+        "time_minutes": 6.5,
+        "temperature_c": 100,
+        "heat_level": "maintain-boil"
+      },
+      "done_when": {
+        "timer": "complete"
+      },
+      "tolerance": {
+        "time_seconds": 15
+      },
+      "notes": "6 min = very runny, 7 min = jammy, 8 min = mostly set",
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-04",
+      "human_text": "Transfer egg immediately to ice water bath",
+      "action": "cool",
+      "target": ["s-03:result"],
+      "params": {
+        "method": "ice-bath",
+        "time_minutes": 1,
+        "temperature_c": 0
+      },
+      "done_when": {
+        "egg_temperature": "cool-to-touch"
+      },
+      "notes": "Stops cooking process",
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-05",
+      "human_text": "Gently crack and peel egg",
+      "action": "prepare",
+      "target": ["s-04:result"],
+      "params": {
+        "method": "tap-all-around",
+        "peeling": "under-running-water"
+      },
+      "hazards": ["sharp-tool"],
+      "since_version": "0.1"
+    },
+    {
+      "step_id": "s-06",
+      "human_text": "Serve immediately with salt and pepper to taste",
+      "action": "garnish",
+      "target": ["s-05:result", "ing-0003", "ing-0004"],
+      "params": {
+        "seasoning": "to-taste",
+        "serving_temperature": "warm"
+      },
+      "since_version": "0.1"
+    }
+  ],
+  "device_profiles": [
+    {
+      "id": "stovetop-simple",
+      "type": "stovetop",
+      "name": "Any Stovetop",
+      "params": {
+        "heat_source": "any",
+        "required_precision": "low"
+      },
+      "since_version": "0.1"
+    },
+    {
+      "id": "timer-basic",
+      "type": "timer",
+      "name": "Kitchen Timer",
+      "params": {
+        "precision_seconds": 1,
+        "alert": "audible"
+      },
+      "notes": "Critical for consistent results",
+      "since_version": "0.1"
+    }
+  ],
+  "sensors": [
+    {
+      "id": "sensor-01",
+      "type": "temperature",
+      "target": "water",
+      "spec": {
+        "value_c": 100,
+        "tolerance": 2
+      },
+      "priority": "optional",
+      "notes": "Visual boiling check usually sufficient",
+      "since_version": "0.1"
+    }
+  ],
+  "compatibility": {
+    "schema_org_jsonld": false,
+    "recommended_archive": "none",
+    "supported_formats": ["json"]
+  },
+  "extensions": {
+    "tips": {
+      "pro_tips": [
+        "Use week-old eggs for easier peeling",
+        "Add 1 tsp vinegar to water to prevent white wisps if egg cracks",
+        "For consistent results, start with room temperature eggs",
+        "Adjust time ±30 seconds based on egg size"
+      ],
+      "common_mistakes": [
+        "Not using timer - guessing leads to inconsistent results",
+        "Skipping ice bath - egg continues cooking",
+        "Using cold eggs - may crack when added to boiling water"
+      ]
+    },
+    "timing_chart": {
+      "yolk_doneness": {
+        "6_minutes": "liquid yolk, just-set white",
+        "6.5_minutes": "runny yolk, firm white",
+        "7_minutes": "jammy yolk, firm white",
+        "8_minutes": "creamy yolk, firm white",
+        "9_minutes": "firm but moist yolk",
+        "10_minutes": "fully hard-boiled"
+      }
+    },
+    "serving_suggestions": [
+      "On toast with avocado",
+      "In ramen soup",
+      "With soldiers (toast strips)",
+      "On salad"
+    ]
+  }
+}
