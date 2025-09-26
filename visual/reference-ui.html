@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCIP Recipe Viewer - Reference UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4ECDC4;
+            --secondary-color: #45B7D1;
+            --danger-color: #FF6B6B;
+            --warning-color: #FFE66D;
+            --success-color: #95E1D3;
+            --dark-text: #2C3E50;
+            --light-text: #7F8C8D;
+            --border-color: #E0E6ED;
+            --background: #F7F9FC;
+            --card-background: #FFFFFF;
+            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .version-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-list {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--light-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            color: var(--dark-text);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Recipe Info Card */
+        .recipe-info {
+            background: var(--card-background);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .recipe-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-title {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            color: var(--light-text);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-color);
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-background);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        /* Ingredients List */
+        .ingredient-item {
+            display: flex;
+            align-items: start;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s ease;
+        }
+
+        .ingredient-item:hover {
+            background: var(--background);
+        }
+
+        .ingredient-item:last-child {
+            border-bottom: none;
+        }
+
+        .ingredient-checkbox {
+            margin-right: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .ingredient-details {
+            flex: 1;
+        }
+
+        .ingredient-name {
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+        .ingredient-amount {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .ingredient-meta {
+            font-size: 0.875rem;
+            color: var(--light-text);
+            margin-top: 0.25rem;
+        }
+
+        /* Allergen Badges */
+        .allergen-badge {
+            display: inline-block;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.25rem;
+        }
+
+        /* Steps */
+        .step-item {
+            display: flex;
+            padding: 1rem;
+            border-left: 3px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-item.active {
+            border-left-color: var(--primary-color);
+            background: linear-gradient(90deg, rgba(78, 205, 196, 0.1) 0%, transparent 100%);
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-text {
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-params {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .param-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--background);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            color: var(--dark-text);
+        }
+
+        .param-icon {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary-color);
+        }
+
+        /* Device Profiles */
+        .device-card {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(69, 183, 209, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .device-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .device-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .device-name {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .device-type {
+            font-size: 0.875rem;
+            color: var(--light-text);
+        }
+
+        .device-params {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .device-param {
+            font-size: 0.875rem;
+        }
+
+        .param-label {
+            color: var(--light-text);
+        }
+
+        .param-value {
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+
+        /* Sensors */
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .sensor-card {
+            background: var(--card-background);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .sensor-card.active {
+            border-color: var(--success-color);
+            box-shadow: 0 0 10px rgba(149, 225, 211, 0.3);
+        }
+
+        .sensor-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 0.5rem;
+            fill: var(--primary-color);
+        }
+
+        .sensor-type {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .sensor-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .sensor-unit {
+            font-size: 0.875rem;
+            color: var(--light-text);
+        }
+
+        /* JSON Viewer */
+        .json-viewer {
+            background: #2C3E50;
+            color: #ECF0F1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .json-viewer pre {
+            margin: 0;
+        }
+
+        .json-key {
+            color: #3498DB;
+        }
+
+        .json-string {
+            color: #E67E22;
+        }
+
+        .json-number {
+            color: #9B59B6;
+        }
+
+        .json-boolean {
+            color: #E74C3C;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .recipe-title {
+                font-size: 1.5rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-muted { color: var(--light-text); }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="50" height="50">
+                        <circle cx="40" cy="40" r="38" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+                        <path d="M 25 25 L 25 45 M 25 25 L 22 22 M 25 25 L 28 22" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <path d="M 55 22 L 55 45 M 55 22 C 58 22 58 28 55 30" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                        <circle cx="40" cy="55" r="2" fill="white"/>
+                        <circle cx="35" cy="60" r="2" fill="white" opacity="0.8"/>
+                        <circle cx="45" cy="60" r="2" fill="white" opacity="0.8"/>
+                    </svg>
+                    <div>
+                        <h1>RCIP Recipe Viewer</h1>
+                        <p style="font-size: 0.875rem; opacity: 0.9;">Recipe Interchange Protocol</p>
+                    </div>
+                </div>
+                <div class="version-badge">
+                    Version 0.1
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <div class="container">
+            <ul class="tab-list">
+                <li><button class="tab-button active" data-tab="overview">📊 Overview</button></li>
+                <li><button class="tab-button" data-tab="ingredients">🥘 Ingredients</button></li>
+                <li><button class="tab-button" data-tab="steps">📝 Instructions</button></li>
+                <li><button class="tab-button" data-tab="devices">🔧 Devices</button></li>
+                <li><button class="tab-button" data-tab="sensors">📡 Sensors</button></li>
+                <li><button class="tab-button" data-tab="nutrition">🍎 Nutrition</button></li>
+                <li><button class="tab-button" data-tab="json">{ } JSON</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Overview Tab -->
+            <div class="tab-panel active" id="overview">
+                <div class="recipe-info">
+                    <div class="recipe-header">
+                        <h2 class="recipe-title">Classic Margherita Pizza</h2>
+                        <p class="text-muted">Traditional Neapolitan pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil</p>
+                    </div>
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            <span><strong>25 min</strong> active</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            <span><strong>25 hours</strong> total</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                            <span><strong>Intermediate</strong> difficulty</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg class="meta-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                            <span><strong>2 pizzas</strong> servings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3 class="card-title">🏷️ Diet Labels</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span class="param-badge" style="background: var(--success-color);">✓ Vegetarian</span>
+                            <span class="param-badge" style="background: var(--success-color);">✓ Nut-Free</span>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">⚠️ Allergen Information</h3>
+                        <div>
+                            <span class="allergen-badge">Gluten</span>
+                            <span class="allergen-badge">Wheat</span>
+                            <span class="allergen-badge">Milk</span>
+                            <span class="allergen-badge">Lactose</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-2">
+                    <h3 class="card-title">📍 Origin</h3>
+                    <div class="recipe-meta">
+                        <div class="meta-item">
+                            <span>🇮🇹 <strong>Italy</strong> • Campania • Naples</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>🍕 <strong>Italian Cuisine</strong> • Traditional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ingredients Tab -->
+            <div class="tab-panel" id="ingredients">
+                <div class="card">
+                    <h3 class="card-title">Ingredients List</h3>
+                    <div id="ingredients-list">
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">500g</span>
+                                    <span class="ingredient-name">00 flour</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Caputo or similar Italian 00 flour recommended
+                                    <span class="allergen-badge">gluten</span>
+                                    <span class="allergen-badge">wheat</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">325ml</span>
+                                    <span class="ingredient-name">water</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Room temperature (20-22°C), filtered preferred
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">250g</span>
+                                    <span class="ingredient-name">fresh mozzarella</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Buffalo mozzarella for authentic taste
+                                    <span class="allergen-badge">milk</span>
+                                    <span class="allergen-badge">lactose</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ingredient-item">
+                            <input type="checkbox" class="ingredient-checkbox">
+                            <div class="ingredient-details">
+                                <div>
+                                    <span class="ingredient-amount">400g</span>
+                                    <span class="ingredient-name">San Marzano tomatoes</span>
+                                </div>
+                                <div class="ingredient-meta">
+                                    Canned whole, Cento brand
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steps Tab -->
+            <div class="tab-panel" id="steps">
+                <div class="card">
+                    <h3 class="card-title">Cooking Instructions</h3>
+                    <div id="steps-list">
+                        <div class="step-item active">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-text">Dissolve yeast in warm water and let it activate for 5 minutes</div>
+                                <div class="step-params">
+                                    <span class="param-badge">
+                                        <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        5 minutes
+                                    </span>
+                                    <span class="param-badge">
+                                        🌡️ 38°C
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-text">Combine flour and salt in a large mixing bowl</div>
+                                <div class="step-params">
+                                    <span class="param-badge">🥣 Large bowl</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-text">Knead dough for 10 minutes until smooth and elastic</div>
+                                <div class="step-params">
+                                    <span class="param-badge">
+                                        <svg class="param-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                                        10 minutes
+                                    </span>
+                                    <span class="param-badge">✋ Hand kneading</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devices Tab -->
+            <div class="tab-panel" id="devices">
+                <div class="card">
+                    <h3 class="card-title">Device Profiles</h3>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <div class="device-icon">🔥</div>
+                            <div>
+                                <div class="device-name">Traditional Wood-Fired Pizza Oven</div>
+                                <div class="device-type">Forno Bravo Casa2G110</div>
+                            </div>
+                        </div>
+                        <div class="device-params">
+                            <div class="device-param">
+                                <span class="param-label">Temperature:</span>
+                                <span class="param-value">450°C</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Heating:</span>
+                                <span class="param-value">Wood-fire</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Preheat:</span>
+                                <span class="param-value">45 min</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Capacity:</span>
+                                <span class="param-value">4 pizzas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="device-card">
+                        <div class="device-header">
+                            <div class="device-icon">🏠</div>
+                            <div>
+                                <div class="device-name">Home Oven Alternative</div>
+                                <div class="device-type">Standard home oven with pizza stone</div>
+                            </div>
+                        </div>
+                        <div class="device-params">
+                            <div class="device-param">
+                                <span class="param-label">Temperature:</span>
+                                <span class="param-value">250°C</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Mode:</span>
+                                <span class="param-value">Bottom heat + broiler</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Pizza Stone:</span>
+                                <span class="param-value">Required</span>
+                            </div>
+                            <div class="device-param">
+                                <span class="param-label">Bake Time:</span>
+                                <span class="param-value">8 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sensors Tab -->
+            <div class="tab-panel" id="sensors">
+                <div class="card">
+                    <h3 class="card-title">Quality Control Sensors</h3>
+                    <div class="sensor-grid">
+                        <div class="sensor-card active">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2l.5.5L6 15.5 4.5 17H12v5l-.5.5L18 9.5 19.5 8H12V2z"/></svg>
+                            <div class="sensor-type">Color</div>
+                            <div class="sensor-value">RGB</div>
+                            <div class="sensor-unit">Crust browning</div>
+                        </div>
+                        <div class="sensor-card">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4z"/></svg>
+                            <div class="sensor-type">Temperature</div>
+                            <div class="sensor-value">450</div>
+                            <div class="sensor-unit">°C</div>
+                        </div>
+                        <div class="sensor-card">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            <div class="sensor-type">Moisture</div>
+                            <div class="sensor-value">58</div>
+                            <div class="sensor-unit">% hydration</div>
+                        </div>
+                        <div class="sensor-card">
+                            <svg class="sensor-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <div class="sensor-type">Texture</div>
+                            <div class="sensor-value">15</div>
+                            <div class="sensor-unit">N hardness</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition Tab -->
+            <div class="tab-panel" id="nutrition">
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3 class="card-title">Nutritional Information</h3>
+                        <p class="text-muted mb-2">Per serving (1/2 pizza)</p>
+                        <div style="display: grid; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span>Calories</span>
+                                <strong>450</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span>Protein</span>
+                                <strong>18g</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span>Carbohydrates</span>
+                                <strong>55g</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <span>Fat</span>
+                                <strong>16g</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                                <span>Fiber</span>
+                                <strong>3g</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Key Nutrients</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Calcium</span>
+                                    <span>25% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 25%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Iron</span>
+                                    <span>15% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 15%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                    <span>Vitamin A</span>
+                                    <span>10% DV</span>
+                                </div>
+                                <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: var(--primary-color); height: 100%; width: 10%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JSON Tab -->
+            <div class="tab-panel" id="json">
+                <div class="card">
+                    <h3 class="card-title">RCIP JSON Format</h3>
+                    <div class="json-viewer">
+                        <pre><code>{
+  <span class="json-key">"rcip_version"</span>: <span class="json-string">"0.1"</span>,
+  <span class="json-key">"id"</span>: <span class="json-string">"rcip-550e8400-e29b-41d4-a716-446655440001"</span>,
+  <span class="json-key">"meta"</span>: {
+    <span class="json-key">"name"</span>: <span class="json-string">"Classic Margherita Pizza"</span>,
+    <span class="json-key">"description"</span>: <span class="json-string">"Traditional Neapolitan pizza"</span>,
+    <span class="json-key">"author"</span>: {
+      <span class="json-key">"name"</span>: <span class="json-string">"Chef Antonio Rossi"</span>,
+      <span class="json-key">"email"</span>: <span class="json-string">"antonio@napoliculinary.it"</span>
+    },
+    <span class="json-key">"servings"</span>: {
+      <span class="json-key">"amount"</span>: <span class="json-number">2</span>,
+      <span class="json-key">"unit"</span>: <span class="json-string">"pizzas"</span>
+    },
+    <span class="json-key">"diet_labels"</span>: [<span class="json-string">"vegetarian"</span>, <span class="json-string">"nut-free"</span>],
+    <span class="json-key">"difficulty"</span>: <span class="json-string">"intermediate"</span>,
+    <span class="json-key">"total_time_minutes"</span>: <span class="json-number">1500</span>
+  },
+  <span class="json-key">"ingredients"</span>: [...],
+  <span class="json-key">"steps"</span>: [...],
+  <span class="json-key">"device_profiles"</span>: [...],
+  <span class="json-key">"sensors"</span>: [...]
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+
+                // Update buttons
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+
+                // Update panels
+                document.querySelectorAll('.tab-panel').forEach(panel => {
+                    panel.classList.remove('active');
+                });
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Interactive features
+        document.querySelectorAll('.step-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.step-item').forEach(step => {
+                    step.classList.remove('active');
+                });
+                item.classList.add('active');
+            });
+        });
+
+        // Simulate sensor updates
+        function updateSensors() {
+            const tempSensor = document.querySelector('.sensor-card:nth-child(2) .sensor-value');
+            if (tempSensor) {
+                const currentTemp = parseInt(tempSensor.textContent);
+                const newTemp = currentTemp + (Math.random() > 0.5 ? 1 : -1);
+                tempSensor.textContent = Math.max(440, Math.min(460, newTemp));
+            }
+        }
+
+        // Update sensors every 3 seconds
+        setInterval(updateSensors, 3000);
+
+        // Load recipe from file (placeholder for actual implementation)
+        function loadRecipe(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const recipe = JSON.parse(e.target.result);
+                    displayRecipe(recipe);
+                } catch (error) {
+                    alert('Invalid RCIP file format');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function displayRecipe(recipe) {
+            // Update UI with recipe data
+            console.log('Recipe loaded:', recipe);
+        }
+    </script>
+</body>
+</html>
